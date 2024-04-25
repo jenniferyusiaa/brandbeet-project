@@ -102,17 +102,40 @@ mmDesktop.add(
           width: "100%",
         },
         "seq-2"
+      );
+
+    let parallaxTl1 = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".round-wrapper-layout-2",
+        start: "center bottom",
+        end: "bottom top",
+        scrub: 1,
+      },
+    });
+
+    parallaxTl1
+      .fromTo(
+        [".rotate-layout-1", ".title-layout-1"],
+        {
+          transform: "translateY(0)",
+        },
+        {
+          transform: "translateY(60%)",
+        },
+        "seq-1"
       )
       .fromTo(
-        ".title-layout-1",
+        ".rotate-layout-1",
         {
+          rotate: -15,
+          opacity: 0.1,
+          scale: 0.75,
+        },
+        {
+          rotate: -25,
           opacity: 0,
         },
-        {
-          opacity: 1,
-          delay: 0.1,
-        },
-        "seq-2"
+        "seq-1"
       );
 
     const layout2Texts = new SplitType(".row-layout-2 h1", {
