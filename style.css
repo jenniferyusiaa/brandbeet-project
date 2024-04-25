@@ -29,13 +29,13 @@ body {
   position: relative;
   top: 0;
   left: 0;
-  height: 100dvh;
+  height: 65vh;
   width: 100%;
   overflow: hidden;
 }
 
 .title-layout-1 {
-  height: 100dvh;
+  height: 65vh;
   width: 100%;
   position: absolute;
   display: flex;
@@ -58,7 +58,7 @@ body {
 .scroll-layout-1 {
   position: absolute;
   left: 50%;
-  bottom: 5%;
+  bottom: 0;
   transform: translateX(-50%);
   z-index: 1;
 }
