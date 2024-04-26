@@ -2,8 +2,8 @@ let mmDesktop = gsap.matchMedia();
 
 mmDesktop.add(
   {
-    isDesktop: "(min-width: 768px)",
-    isMobile: "(max-width: 768px)",
+    isDesktop: "(min-width: 769px)",
+    isMobile: "(max-width: 769px)",
   },
   (context) => {
     let { isDesktop, isMobile } = context.conditions;
@@ -180,6 +180,199 @@ mmDesktop.add(
         stagger: 0.05,
       }
     );
+
+    let revealTl4 = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".main-layout-4",
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1,
+      },
+    });
+
+    revealTl4
+      .fromTo(
+        ".symbol-layout-4",
+        {
+          rotate: 0,
+        },
+        {
+          rotate: 360,
+        }
+      )
+      .fromTo(
+        ".symbol-layout-4",
+        {
+          transform: "translate(0)",
+          rotate: 0,
+        },
+        {
+          transform: "translateX(calc(50vw - 100%))",
+          rotate: 360,
+        }
+      );
+
+    const container4 = gsap.utils.toArray(".container-layout-4");
+
+    container4.forEach((container) => {
+      let randomTl4 = gsap.timeline({
+        scrollTrigger: {
+          trigger: container,
+          start: "top bottom",
+          end: "top top",
+          scrub: 1,
+        },
+      });
+
+      randomTl4
+        .fromTo(
+          container,
+          {
+            opacity: 0,
+          },
+          {
+            opacity: 1,
+            delay: isDesktop ? 0.25 : 0,
+          },
+          "seq-1"
+        )
+        .fromTo(
+          container,
+          {
+            opacity: 1,
+          },
+          {
+            opacity: 0,
+            delay: isDesktop ? 0.25 : 0,
+          },
+          "seq-2"
+        );
+    });
+
+    const textDefault5 = new SplitType(".row-layout-5 span:nth-child(1)", {
+      types: "words, chars",
+    });
+
+    const textAbove5 = new SplitType(".row-layout-5 span:nth-child(2)", {
+      types: "words, chars",
+    });
+
+    const revealChars5 = textAbove5.chars;
+
+    let revealTl5 = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".text-layout-5",
+        start: "top 75%",
+        end: "top top",
+        scrub: 1,
+      },
+    });
+
+    revealTl5
+      .fromTo(
+        ".row-layout-5:nth-child(1) span:nth-child(2)",
+        {
+          width: isDesktop && 0,
+          transform: "translateX(15px)",
+        },
+        {
+          width: isDesktop && "100%",
+          transform: "translateX(0)",
+          delay: 0.25,
+        },
+        "seq-1"
+      )
+      .fromTo(
+        ".row-layout-5:nth-child(2) span:nth-child(2)",
+        {
+          width: isDesktop && 0,
+          transform: "translateX(15px)",
+        },
+        {
+          width: isDesktop && "100%",
+          transform: "translateX(0)",
+          delay: 0.5,
+        },
+        "seq-1"
+      )
+      .fromTo(
+        revealChars5,
+        {
+          opacity: !isDesktop && 0,
+        },
+        {
+          opacity: !isDesktop && 1,
+          stagger: 0.05,
+        },
+        "seq-1"
+      );
+
+    let roundTl6 = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".round-layout-6",
+        start: "bottom 75%",
+        end: "bottom top",
+        scrub: 1,
+      },
+    });
+
+    roundTl6.fromTo(
+      ".round-layout-6",
+      {
+        borderRadius: "0 0 50% 50%",
+      },
+      {
+        borderRadius: 0,
+      }
+    );
+
+    const row6 = gsap.utils.toArray(".row-layout-6 h1:nth-child(2)");
+
+    row6.forEach((row) => {
+      let revealT6 = gsap.timeline({
+        scrollTrigger: {
+          trigger: row,
+          start: "top bottom",
+          end: "top center",
+          scrub: 1,
+        },
+      });
+
+      const textDefault6 = new SplitType(".row-layout-6 h1:nth-child(1)", {
+        types: "words, chars",
+      });
+
+      const textMove6 = new SplitType(".row-layout-6 h1:nth-child(2)", {
+        types: "words, chars",
+      });
+
+      const charMove6 = textMove6.chars;
+
+      revealT6
+        .fromTo(
+          row,
+          {
+            width: isDesktop && 0,
+          },
+          {
+            width: isDesktop && "100%",
+            delay: 2,
+          },
+          "seq-1"
+        )
+        .fromTo(
+          charMove6,
+          {
+            opacity: !isDesktop && 0,
+          },
+          {
+            opacity: !isDesktop && 1,
+            stagger: 0.1,
+            delay: 1,
+          },
+          "seq-1"
+        );
+    });
 
     return () => {
       window.addEventListener("resize", () => {
