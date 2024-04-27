@@ -333,7 +333,7 @@ mmDesktop.add(
         scrollTrigger: {
           trigger: row,
           start: "top bottom",
-          end: "top center",
+          end: isDesktop ? "bottom top" : "top center",
           scrub: 1,
         },
       });
@@ -356,7 +356,7 @@ mmDesktop.add(
           },
           {
             width: isDesktop && "100%",
-            delay: 2,
+            delay: 1.5,
           },
           "seq-1"
         )
@@ -373,6 +373,115 @@ mmDesktop.add(
           "seq-1"
         );
     });
+
+    let screenTl8 = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".main-layout-8",
+        start: "top top",
+        end: "750% top",
+        scrub: 1,
+        pin: true,
+      },
+    });
+
+    screenTl8
+      .fromTo(
+        ".button-layout-8",
+        {
+          bottom: "-10%",
+        },
+        {
+          bottom: "2.5%",
+        },
+        "seq-1"
+      )
+      .fromTo(
+        ".cover-layout-8",
+        {
+          height: "55%",
+        },
+        {
+          height: 0,
+        },
+        "seq-2"
+      )
+      .fromTo(
+        ".text-layout-8:nth-child(1) h1",
+        {
+          top: "50%",
+          left: "75%",
+          transform: "translate(-50%, -50%)",
+        },
+        {
+          top: 0,
+          left: 0,
+          transform: "translate(0, -25%)",
+        },
+        "seq-2"
+      )
+      .fromTo(
+        ".text-layout-8:nth-child(2) h1",
+        {
+          bottom: "50%",
+          right: "75%",
+          transform: "translate(50%, 50%)",
+        },
+        {
+          bottom: 0,
+          right: 0,
+          transform: "translate(0, 25%)",
+        },
+        "seq-2"
+      )
+      .fromTo(
+        ".container-layout-8",
+        {
+          transform: "translateY(0)",
+        },
+        {
+          transform: "translateY(-87.5%)",
+        },
+        "seq-3"
+      );
+
+    const creditText = new SplitType(".credit-section p:nth-child(1)", {
+      types: "chars",
+    });
+    const creditChar = creditText.chars;
+
+    gsap.fromTo(
+      creditChar,
+      {
+        fontSize: 10,
+      },
+      {
+        fontSize: 25,
+        stagger: 0.1,
+        duration: 2.5,
+        repeat: -1,
+        yoyo: true,
+      }
+    );
+
+    let tlSection = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".content-section",
+        start: "top top",
+        end: "5000% top",
+        scrub: 1,
+        pin: true,
+      },
+    });
+
+    tlSection.fromTo(
+      ".content-section",
+      {
+        opacity: 1,
+      },
+      {
+        opacity: 0,
+      }
+    );
 
     return () => {
       window.addEventListener("resize", () => {
